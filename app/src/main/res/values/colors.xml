@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorMint">#8BC5B4</color>
+
+<!--    -->
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+<!--    -->
+
+<!--  AEA955  -->
+    <color name="busYellow">#B5A638</color>
+    <color name="busGreen">#449F66</color>
+
+<!--    -->
+
+    <color name="lightRed">#E3B3A8</color>
+    <color name="lightOrange">#FAD2A3</color>
+    <color name="lightYellow">#EADB98</color>
+    <color name="lightGreen">#B9DCD2</color>
+    <color name="lightBlue">#AFC8EF</color>
+    <color name="lightViolet">#C7AEF2</color>
+    <color name="lightGray">#CACACA</color>
+
+    <color name="accentedRed">#E67860</color>
+    <color name="accentedOrange">#DD9A4B</color>
+    <color name="accentedYellow">#DFC444</color>
+    <color name="accentedGreen">#5BB67D</color>
+    <color name="accentedBlue">#6193E3</color>
+    <color name="accentedViolet">#9C6DEA</color>
+    <color name="accentedGray">#757575</color>
+
+    <color name="darkRed">#9E503E</color>
+    <color name="darkOrange">#B87321</color>
+    <color name="darkYellow">#AF9621</color>
+    <color name="darkGreen">#297E65</color>
+    <color name="darkBlue">#2E528C</color>
+    <color name="darkViolet">#6038A5</color>
+    <color name="darkGray">#4C4C4C</color>
+</resources>
