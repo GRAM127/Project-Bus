@@ -65,7 +65,7 @@ class BISFragment : Fragment() {
             }
         }
         busJs?.call("getBusData", arrayOf(BusData.RIGHT))?.let {
-            Log.d("#LOG _ RIGHT", it.toString())
+//            Log.d("#LOG _ RIGHT", it.toString())
             JSONArray(it.toString()).list().forEach { item ->
                 busList.find { bus -> bus.name == item.getString("name").toString() }?.setBusLocation(item.getJSONArray("locationList").listTo(), BusData.RIGHT)
             }
@@ -84,55 +84,59 @@ const BN5 = "083";    //busId = 12029
 const BN6 = "086";    //busId = 2800994
         
 getBusData = function(direction) {
-    let url = org.jsoup.Jsoup.connect(getUrl(direction)).ignoreContentType(true).get().text()
-    let json = JSON.parse(url).message.result.busArrivalList
+    try {
+        let url = org.jsoup.Jsoup.connect(getUrl(direction)).ignoreContentType(true).get().text()
+        let json = JSON.parse(url).message.result.busArrivalList
             
-    return "[" + json.map(e => {
-            var locationList = []
-            if(direction=="LEFT"){
-                if (e.locationNo1 != null) {
-                    locationList.push(
-                        {
-                            name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196933'))-Number(e.locationNo1)]), 	// 첫 번째 버스 위치 -> 정류장 이름으로
-                            time: String(Number(e.predictTime1)/60).split(".")[0]	// 첫 번째 버스 시간
-                        }
-                    )
+        return "[" + json.map(e => {
+                var locationList = []
+                if(direction=="LEFT"){
+                    if (e.locationNo1 != null) {
+                        locationList.push(
+                            {
+                                name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196933'))-Number(e.locationNo1)]), 	// 첫 번째 버스 위치 -> 정류장 이름으로
+                                time: String(Number(e.predictTime1)/60).split(".")[0]	// 첫 번째 버스 시간
+                            }
+                        )
+                    }
+                    if (e.locationNo2 != null) {
+                        locationList.push(
+                            {
+                                name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196933'))-Number(e.locationNo2)]),     // 두 번째 버스 위치 -> 정류장 이름으로
+                                time: String(Number(e.predictTime2)/60).split(".")[0] 	 // 두 번째 버스 시간
+                            }
+                        )
+                    }
+                }else if(direction=="RIGHT"){ 
+                    if (e.locationNo1 != null) {
+                        locationList.push(
+                            {
+                                name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196934'))-Number(e.locationNo1)]),	 // 첫 번째 버스 위치 -> 정류장 이름으로
+                                time: String(Number(e.predictTime1)/60).split(".")[0]	// 첫 번째 버스 시간
+                            }
+                        )
+                    }
+                    if (e.locationNo2 != null) {
+                        locationList.push(
+                            {
+                                name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196934'))-Number(e.locationNo2)]),     // 두 번째 버스 위치 -> 정류장 이름으로
+                                time: String(Number(e.predictTime2)/60).split(".")[0] 	 // 두 번째 버스 시간
+                            }
+                        )
+                    } 
                 }
-                if (e.locationNo2 != null) {
-                    locationList.push(
-                        {
-                            name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196933'))-Number(e.locationNo2)]),     // 두 번째 버스 위치 -> 정류장 이름으로
-                            time: String(Number(e.predictTime2)/60).split(".")[0] 	 // 두 번째 버스 시간
-                        }
-                    )
-                }
-            }else if(direction=="RIGHT"){ 
-                if (e.locationNo1 != null) {
-                    locationList.push(
-                        {
-                            name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196934'))-Number(e.locationNo1)]),	 // 첫 번째 버스 위치 -> 정류장 이름으로
-                            time: String(Number(e.predictTime1)/60).split(".")[0]	// 첫 번째 버스 시간
-                        }
-                    )
-                }
-                if (e.locationNo2 != null) {
-                    locationList.push(
-                        {
-                            name: String(getName(e.routeId)[Number(getId(e.routeId).findIndex(v => v[0]=='196934'))-Number(e.locationNo2)]),     // 두 번째 버스 위치 -> 정류장 이름으로
-                            time: String(Number(e.predictTime2)/60).split(".")[0] 	 // 두 번째 버스 시간
-                        }
-                    )
-                } 
+                        
+                return JSON.stringify(
+                    {
+                        name: String( e.routeId.replace("5516",BN1).replace("12018",BN2).replace("12072",BN3).replace("12013",BN4).replace("12029",BN5).replace("2800994",BN6) ),       // 이름
+                        locationList: locationList
+                    }
+                )
             }
-                    
-            return JSON.stringify(
-                {
-                    name: String( e.routeId.replace("5516",BN1).replace("12018",BN2).replace("12072",BN3).replace("12013",BN4).replace("12029",BN5).replace("2800994",BN6) ),       // 이름
-                    locationList: locationList
-                }
-            )
-        }
-    ) + "]"
+        ) + "]"
+    } catch(e) {
+        return String("[]")
+    }
 }
         
 getUrl = function(direction) {
