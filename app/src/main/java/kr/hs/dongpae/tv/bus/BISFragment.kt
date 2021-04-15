@@ -33,7 +33,7 @@ class BISFragment : Fragment() {
             BusData("150", R.color.busGreen),
 
             BusData("081", R.color.busYellow),
-            BusData("082", R.color.busYellow), // 동패중 방향만 있음
+            BusData("082", R.color.busYellow),  // 동패중 방향만 있음
             BusData("083", R.color.busYellow),
             BusData("086", R.color.busYellow)
     )
@@ -51,10 +51,13 @@ class BISFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+//        assets/bus.js 코드 로드 -> 버스 정보 파싱
         val jsCode = resources.assets.open("bus.js").bufferedReader().use { it.readText() }
 
+//        bus.js 실행
         busJs = JSManager.importJS(jsCode, "bus")
 
+//        Coroutine으로 버스 업데이트 3초마다 실행
         CoroutineScope(Dispatchers.IO).launch {
             while (true) {
                 updateBusData()
@@ -64,13 +67,14 @@ class BISFragment : Fragment() {
     }
 
     private fun updateBusData() {
+//        bus.js에서 버스 정보 받아외 저장
+
         busJs?.call("getStationData", arrayOf(BusData.LEFT))?.let {
             JSONArray(it.toString()).list().forEach { item ->
                 busList.find { bus -> bus.name == item.getString("name").toString() }?.setBusLocation(item.getJSONArray("locationList").listTo(), BusData.LEFT)
             }
         }
         busJs?.call("getStationData", arrayOf(BusData.RIGHT))?.let {
-//            Log.d("#LOG _ RIGHT", it.toString())
             JSONArray(it.toString()).list().forEach { item ->
                 busList.find { bus -> bus.name == item.getString("name").toString() }?.setBusLocation(item.getJSONArray("locationList").listTo(), BusData.RIGHT)
             }

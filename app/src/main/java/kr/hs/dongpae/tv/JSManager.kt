@@ -6,8 +6,10 @@ import org.mozilla.javascript.Function
 import org.mozilla.javascript.ScriptableObject
 import java.util.*
 
+
 class JSManager(private val scope: ScriptableObject) {
 
+//    Javascript 함수 실행 -> return은 Any 로
     fun call(funcName: String, args: Array<Any> = arrayOf()): Any? {
         val rhino = Context.enter()
         try {
@@ -20,6 +22,7 @@ class JSManager(private val scope: ScriptableObject) {
     }
 
     companion object {
+//        Javascript 실행
         fun importJS(script: String, name: String): JSManager? {
             val rhino = Context.enter()
             rhino.optimizationLevel = -1

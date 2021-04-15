@@ -1,14 +1,7 @@
 package kr.hs.dongpae.tv.bus
 
-import android.util.Log
 import androidx.annotation.ColorRes
 import com.google.gson.annotations.SerializedName
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kr.hs.dongpae.tv.HttpUtils
-import org.json.JSONObject
 
 data class BusData(val name: String, @ColorRes val color: Int) {
 
@@ -27,12 +20,12 @@ data class BusData(val name: String, @ColorRes val color: Int) {
 //    ------------
 
     companion object {
-        const val LEFT = "LEFT"      // 운정 방향 (동패고 -> 한울공원)
-        const val RIGHT = "RIGHT"     // 일산 방향 (동패고 -> 동패중)
+        const val LEFT = "LEFT"         // 일산 방향 (동패고 -> 동패중)
+        const val RIGHT = "RIGHT"       // 운정 방향 (동패고 -> 한울공원)
     }
 
     data class LocationData(
         @SerializedName("name") val name: String,
-        @SerializedName("time") val time: String // TODO("String -> Int")
+        @SerializedName("time") val time: String
         )
 }

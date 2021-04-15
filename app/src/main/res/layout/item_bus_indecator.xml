@@ -9,8 +9,6 @@
     android:background="@drawable/view_bus_layout"
     android:clipChildren="false">
 
-    <!--  TODO("화살표나 애니메이션 등으로 버스 진행 경로 표시")  -->
-
     <View
         android:id="@+id/view"
         android:layout_width="wrap_content"

@@ -18,6 +18,8 @@ Bottom Message Bar
 
 class BottomMessageFragment : Fragment() {
 
+//    TODO("나중에 메세지 받아와서 실행하도록 만들기")
+
     private val messageList = listOf(
         "제작 : 프로젝트 버스, k1a1",
         "현재 테스트 버전입니다. 오류가 발생할 수 있습니다.",
@@ -28,7 +30,6 @@ class BottomMessageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_bottom_message, container, false)
     }
 

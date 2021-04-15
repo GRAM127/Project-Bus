@@ -7,6 +7,7 @@ import org.json.JSONObject
 class JsonUtil { }
 
 
+// JSON 배열 JSONObject로 return
 fun JSONArray.list(): List<JSONObject> {
     val list = mutableListOf<JSONObject>()
     for (i in 0 until length()) {
@@ -15,6 +16,7 @@ fun JSONArray.list(): List<JSONObject> {
     return list
 }
 
+// JSON 배열 List로 return
 inline fun <reified D> JSONArray.listTo(): List<D> {
     val list = mutableListOf<D>()
     for (i in 0 until length()) {

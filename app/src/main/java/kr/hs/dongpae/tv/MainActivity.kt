@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         
 
         // 전체 화면
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) { // R => 30
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) { // R = 30
             window.setDecorFitsSystemWindows(false)
             window.insetsController?.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
             window.insetsController?.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -42,7 +42,5 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
     }
-
-//    TODO("앱 종료시 다시 로드")
 
 }

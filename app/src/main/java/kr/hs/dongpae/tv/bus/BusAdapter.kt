@@ -22,7 +22,6 @@ import kr.hs.dongpae.tv.bus.BusData.Companion.RIGHT
 
 class BusAdapter(private val context: Context, private val bus: List<BusData>): RecyclerView.Adapter<BusAdapter.BusHolder>() {
 
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BusHolder(LayoutInflater.from(context).inflate(R.layout.item_bus_indecator_min, parent, false))
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BusHolder(LayoutInflater.from(context).inflate(R.layout.item_bus_indecator, parent, false))
     override fun onBindViewHolder(holder: BusHolder, position: Int) = holder.bind(bus[position])
     override fun getItemCount() = bus.size
@@ -50,8 +49,10 @@ class BusAdapter(private val context: Context, private val bus: List<BusData>): 
         @SuppressLint("SetTextI18n")
         private fun update(data: BusData) {
             with(itemView) {
+//                애니메이션 젹용
                 TransitionManager.beginDelayedTransition(layout_bus_rootview, ChangeText().setChangeBehavior(ChangeText.CHANGE_BEHAVIOR_OUT_IN))
 
+//                버스 정보 띄우기
                 data.getBusLocation(LEFT).forEachIndexed { index, locationData ->
                     when (index) {
                         0 -> {
