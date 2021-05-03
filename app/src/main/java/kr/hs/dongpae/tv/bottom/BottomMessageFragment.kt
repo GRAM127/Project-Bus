@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_bottom_message.*
+import kr.hs.dongpae.tv.FirebaseDatabaseMap
 import kr.hs.dongpae.tv.R
 
 
@@ -18,14 +20,6 @@ Bottom Message Bar
 
 class BottomMessageFragment : Fragment() {
 
-//    TODO("나중에 메세지 받아와서 실행하도록 만들기")
-
-    private val messageList = listOf(
-        "제작 : 프로젝트 버스, k1a1",
-        "현재 테스트 버전입니다. 오류가 발생할 수 있습니다.",
-        "TV 옆 QR코드를 스캔하여 설문에 참여해 주세요."
-    )
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +30,13 @@ class BottomMessageFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        text_bottom_message.text = messageList.joinToString("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        val databaseReference = FirebaseDatabase.getInstance().reference
+
+        val textMap = FirebaseDatabaseMap<String?>(databaseReference.child("bottom_message"))
+        textMap.setOnUpdateListener {
+            text_bottom_message.text = textMap.get().toList().map { it.second }.joinToString("\t\t\t\t\t\t\t\t")
+        }
+
         text_bottom_message.isSelected = true
 
     }
