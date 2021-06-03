@@ -1,22 +1,20 @@
 package kr.hs.dongpae.tv
 
-import android.content.Context
 import android.os.Bundle
-import android.os.PowerManager
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        
+        setContentView(R.layout.activity_main_bus)
+//        setContentView(R.layout.activity_main_ather)
+
 
         // 전체 화면
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) { // R = 30

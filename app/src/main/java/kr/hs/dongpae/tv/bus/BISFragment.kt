@@ -1,21 +1,15 @@
 package kr.hs.dongpae.tv.bus
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_bus.view.*
 import kotlinx.coroutines.*
 import kr.hs.dongpae.tv.*
 import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.File
-import java.io.IOException
 
 /*
 Bus Information System
@@ -70,12 +64,12 @@ class BISFragment : Fragment() {
 //        bus.js에서 버스 정보 받아외 저장
 
         busJs?.call("getStationData", arrayOf(BusData.LEFT))?.let {
-            JSONArray(it.toString()).list().forEach { item ->
+            JSONArray(it.toString()).listObject().forEach { item ->
                 busList.find { bus -> bus.name == item.getString("name").toString() }?.setBusLocation(item.getJSONArray("locationList").listTo(), BusData.LEFT)
             }
         }
         busJs?.call("getStationData", arrayOf(BusData.RIGHT))?.let {
-            JSONArray(it.toString()).list().forEach { item ->
+            JSONArray(it.toString()).listObject().forEach { item ->
                 busList.find { bus -> bus.name == item.getString("name").toString() }?.setBusLocation(item.getJSONArray("locationList").listTo(), BusData.RIGHT)
             }
         }

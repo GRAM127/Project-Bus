@@ -8,7 +8,7 @@ class JsonUtil { }
 
 
 // JSON 배열 JSONObject로 return
-fun JSONArray.list(): List<JSONObject> {
+fun JSONArray.listObject(): List<JSONObject> {
     val list = mutableListOf<JSONObject>()
     for (i in 0 until length()) {
         list.add(JSONObject(get(i).toString()))
