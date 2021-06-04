@@ -9,7 +9,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart_weather"
+            android:layout_width="0dp"
+            android:layout_height="256dp"
+            android:layout_margin="0dp"
+            android:clipChildren="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" >
+
+        </com.github.mikephil.charting.charts.LineChart>
 
         <ImageView
             android:id="@+id/imageView2"
@@ -132,15 +145,49 @@
                 app:layout_constraintTop_toTopOf="@+id/view_weather_pm2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_weather"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_weather" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <include
+                android:id="@+id/item_weather_1"
+                layout="@layout/item_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <include
+                android:id="@+id/item_weather_2"
+                layout="@layout/item_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <include
+                android:id="@+id/item_weather_3"
+                layout="@layout/item_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <include
+                android:id="@+id/item_weather_4"
+                layout="@layout/item_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <include
+                android:id="@+id/item_weather_5"
+                layout="@layout/item_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

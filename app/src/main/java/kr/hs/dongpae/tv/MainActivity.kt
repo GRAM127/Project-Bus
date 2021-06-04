@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_bus)
-//        setContentView(R.layout.activity_main_ather)
+//        setContentView(R.layout.activity_main_weather)
 
 
         // 전체 화면
