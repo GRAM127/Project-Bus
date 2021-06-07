@@ -1,20 +1,45 @@
 package kr.hs.dongpae.tv
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import java.time.LocalDateTime
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_bus)
-//        setContentView(R.layout.activity_main_weather)
 
+        val alarmReceiverIntent = Intent(this, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, AlarmReceiver.RECEIVE_ID, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        if (pendingIntent == null) {
+            val calendar: Calendar = Calendar.getInstance().apply {
+                timeInMillis = System.currentTimeMillis()
+                set(Calendar.HOUR_OF_DAY, 14)
+            }
+            (getSystemService(ALARM_SERVICE) as AlarmManager).setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_HALF_DAY,
+                pendingIntent
+            )
+        }
+
+        val time = LocalDateTime.now().plusMinutes(10)
+        if (time.hour >= 14) {
+            setContentView(R.layout.activity_main_bus)
+        } else {
+            setContentView(R.layout.activity_main_weather)
+        }
 
         // 전체 화면
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) { // R = 30

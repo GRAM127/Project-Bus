@@ -48,6 +48,7 @@ class WeatherFragment : Fragment() {
         weather = JSManager.importJS(jsCode, "weather")
 
 //        Coroutine으로 날씨 업데이트 60초마다 실행
+//        TODO("AlarmReceiver로 변경할 것?")
         CoroutineScope(Dispatchers.IO).launch {
             while (true) {
                 update()

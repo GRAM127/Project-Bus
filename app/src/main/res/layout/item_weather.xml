@@ -26,8 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_weather_item_time"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            app:tint="@color/white" />
+            app:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
             android:id="@+id/text_weather_item_temperature"

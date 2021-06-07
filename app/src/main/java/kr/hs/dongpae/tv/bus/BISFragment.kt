@@ -52,6 +52,7 @@ class BISFragment : Fragment() {
         busJs = JSManager.importJS(jsCode, "bus")
 
 //        Coroutine으로 버스 업데이트 3초마다 실행
+        //        TODO("AlarmReceiver로 변경할 것?")
         CoroutineScope(Dispatchers.IO).launch {
             while (true) {
                 updateBusData()
