@@ -19,7 +19,7 @@
 
 function getWeather() {
     try {
-        var data = org.jsoup.Jsoup.connect("https://m.search.naver.com/search.naver?where=m&sm=mtb_drt&query=%ED%8C%8C%EC%A3%BC%EC%8B%9C%20%EC%9A%B4%EC%A0%953%EB%8F%99%EB%82%A0%EC%94%A8").get();
+        let data = org.jsoup.Jsoup.connect("https://m.search.naver.com/search.naver?where=m&sm=mtb_drt&query=%ED%8C%8C%EC%A3%BC%EC%8B%9C%20%EC%9A%B4%EC%A0%953%EB%8F%99%EB%82%A0%EC%94%A8").get();
         let main = data.select("div.status_wrap");
         let temp_now = main.select("strong").get(0).text().replace(main.select("strong").select("span").get(0).text(), "").replace(main.select("strong").select("span").get(1).text(), "");
         let weather = main.select("div.weather_main").get(0).text();

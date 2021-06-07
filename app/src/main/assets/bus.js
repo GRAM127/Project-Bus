@@ -23,7 +23,7 @@ function getStationData(direction) {
 			if (e.locationNo2 != null) {
 				locationList.push({
 					name: String(getBusStop(e.routeId, direction, Number(e.locationNo2))),
-					time: String(Number(e.predictTime2) / 60).split(".")[0]
+					time: String(Number(e.priconedictTime2) / 60).split(".")[0]
 				})
 			}
 			return JSON.stringify({

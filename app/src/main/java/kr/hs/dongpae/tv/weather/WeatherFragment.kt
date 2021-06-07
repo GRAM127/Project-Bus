@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -55,14 +56,36 @@ class WeatherFragment : Fragment() {
         }
     }
 
+    private fun getIcon(weather: String) = when (weather) {
+        "맑음" -> R.drawable.ic_weather_sun
+        "구름조금" -> R.drawable.ic_weather_sunny
+        "구름많음" -> R.drawable.ic_weather_cloud
+        "흐림" -> R.drawable.ic_weather_cloudy
+        "비", "소나기", "가끔비" -> R.drawable.ic_weather_rain
+        "눈", "가끔눈" -> R.drawable.ic_weather_snow
+        "천둥번개" -> R.drawable.ic_weather_lightning
+        else -> R.drawable.ic_weather_sunny
+    }
+
     @SuppressLint("SetTextI18n")
     private suspend fun update() {
 
         weather?.call("getWeather")?.let {
             val data = JSONObject(it.toString())
 
-//                TODO("배경 -> 라이브 이미지")
             withContext(Dispatchers.Main) {
+
+                Glide.with(this@WeatherFragment.requireContext()).load(when (data.getString("weather")) {
+                    "맑음" -> R.drawable.wallpaper_sky
+                    "구름조금", "구름많음" -> R.drawable.wallpaper_cloud
+                    "흐림" -> R.drawable.wallpaper_cloud_dack
+                    "비", "소나기", "가끔비" -> R.drawable.wallpaper_rain
+                    "눈", "가끔눈" -> R.drawable.wallpaper_snow
+                    "천둥번개" -> R.drawable.wallpaper_lightning
+                    else -> R.drawable.ic_weather_sunny
+                }).into(image_weather_background)
+//                Glide.with(this@WeatherFragment.requireContext()).load(R.drawable.wallpaper_lightning).into(image_weather_background)
+
                 text_weather_temperature.text = data.getInt("temperature").toString() + "도"
                 text_weather_pm10.text = data.getInt("pm10").toString()
                 view_weather_pm10.backgroundTintList = when (data.getInt("pm10")) {
@@ -79,8 +102,9 @@ class WeatherFragment : Fragment() {
                     else -> activity!!.getColorStateList(R.color.accentedRed)
                 }
 
+                image_weather.setImageResource(getIcon(data.getString("weather")))
+
 //                TODO("이미지")
-//                TODO("리스트 -> 그래프")
 //                https://under-desk.tistory.com/183setDrawLabels
 
                 val entryList = arrayListOf<Entry>()
@@ -88,24 +112,9 @@ class WeatherFragment : Fragment() {
                 JSONArray(data.getString("hourly")).listObject().forEachIndexed { index, item ->
                     entryList.add(Entry(index.toFloat(), item.getInt("temperature").toFloat()))
 
-//                    val index = list.indexOfFirst { i -> i.time == item.getInt("time") }
-//                    val wData = WeatherData(
-//                        item.getInt("time"),
-//                        item.getInt("temperature"),
-////                        item.getString("weather")
-//                    0
-//                    )
-//                    if (index >= 0) {
-////                        if (list.find { i -> i == wData } != null) TODO()
-////                        list[index] = wData
-////                        list_weather.adapter?.notifyItemChanged(index)
-//                    } else {
-                        viewList[index].text_weather_item_time.text = "${item.getInt("time")}시"
-                        viewList[index].text_weather_item_temperature.text = "${item.getInt("temperature")}°"
-//                        list.add(wData)
-//                        list_weather.adapter?.notifyItemChanged(index)
-
-//                    }
+                    viewList[index].image_weather_item_weather.setImageResource(getIcon(item.getString("weather")))
+                    viewList[index].text_weather_item_time.text = "${item.getInt("time")}시"
+                    viewList[index].text_weather_item_temperature.text = "${item.getInt("temperature")}°"
                 }
 
                 val lineData = LineData()
