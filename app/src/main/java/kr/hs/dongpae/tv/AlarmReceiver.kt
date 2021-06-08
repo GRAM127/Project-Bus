@@ -7,7 +7,7 @@ import android.content.Intent
 class AlarmReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val activityIntent = Intent(context, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         }
         context?.startActivity(activityIntent)
     }
