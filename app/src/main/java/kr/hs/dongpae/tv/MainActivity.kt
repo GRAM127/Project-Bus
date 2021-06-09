@@ -46,11 +46,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        setForeground()
-    }
-
     private fun setForeground() {
         val alarmReceiverIntent = Intent(this, AlarmReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(this, AlarmReceiver.RECEIVE_ID, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
