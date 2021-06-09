@@ -30,8 +30,8 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".AlarmReceiver">
-            android:exported="false">
+        <receiver android:name=".AlarmReceiver"
+            android:exported="false" >
         </receiver>
 
     </application>
