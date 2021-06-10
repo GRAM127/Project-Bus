@@ -21,6 +21,7 @@ Bus Information System
 class BISFragment : Fragment() {
 
     private var busJs: JSManager? = null
+    private var coroutine: Job? = null
 
     private val busList = listOf(
             BusData("66", R.color.busGreen),
@@ -53,12 +54,17 @@ class BISFragment : Fragment() {
 
 //        Coroutine으로 버스 업데이트 3초마다 실행
         //        TODO("AlarmReceiver로 변경할 것?")
-        CoroutineScope(Dispatchers.IO).launch {
+        coroutine = CoroutineScope(Dispatchers.IO).launch {
             while (true) {
                 updateBusData()
                 delay(3000)
             }
         }
+    }
+
+    override fun onDestroy() {
+        coroutine?.cancel()
+        super.onDestroy()
     }
 
     private fun updateBusData() {

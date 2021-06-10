@@ -49,18 +49,16 @@ class MainActivity : AppCompatActivity() {
     private fun setForeground() {
         val alarmReceiverIntent = Intent(this, AlarmReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(this, AlarmReceiver.RECEIVE_ID, alarmReceiverIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-        if (pendingIntent == null) {
-            val calendar: Calendar = Calendar.getInstance().apply {
-                timeInMillis = System.currentTimeMillis()
-                set(Calendar.HOUR_OF_DAY, 14)
-            }
-            (getSystemService(ALARM_SERVICE) as AlarmManager).setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                AlarmManager.INTERVAL_HALF_DAY,
-                pendingIntent
-            )
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 14)
         }
+        (getSystemService(ALARM_SERVICE) as AlarmManager?)?.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_HALF_DAY,
+            pendingIntent
+        )
 
         val time = LocalDateTime.now().plusMinutes(10)
         if (time.hour >= 14) {

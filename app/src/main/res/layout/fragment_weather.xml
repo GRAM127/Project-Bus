@@ -48,10 +48,10 @@
             android:id="@+id/text_weather_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="48dp"
             android:text="12도"
             android:textColor="@color/white"
-            android:textSize="108sp"
+            android:textSize="144sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/image_weather"
             app:layout_constraintStart_toEndOf="@+id/image_weather"
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="PM10"
+                android:text="@string/weather_pm10"
                 android:textColor="@color/white"
                 android:textSize="48sp"
                 android:textStyle="bold"
@@ -116,11 +116,11 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="PM2.5"
+                android:text="@string/weather_pm2"
                 android:textColor="@color/white"
                 android:textSize="48sp"
                 android:textStyle="bold"
@@ -135,22 +135,22 @@
                 android:layout_height="80dp"
                 android:background="@drawable/view_weather_box"
                 android:backgroundTint="@color/accentedBlue"
-                app:layout_constraintBottom_toBottomOf="@+id/textView11"
+                app:layout_constraintBottom_toBottomOf="@+id/textView4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView11" />
+                app:layout_constraintTop_toTopOf="@+id/textView4" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/text_weather_pm2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="14"
                 android:textColor="@color/white"
                 android:textSize="34sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/view_weather_pm2"
+                app:layout_constraintBottom_toBottomOf="@id/view_weather_pm2"
                 app:layout_constraintEnd_toEndOf="@+id/view_weather_pm2"
                 app:layout_constraintStart_toStartOf="@+id/view_weather_pm2"
-                app:layout_constraintTop_toTopOf="@+id/view_weather_pm2" />
+                app:layout_constraintTop_toTopOf="@id/view_weather_pm2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
